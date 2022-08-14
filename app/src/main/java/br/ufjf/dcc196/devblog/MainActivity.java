@@ -41,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
         CategoriaAdapter.OnCategoriaClickListener listenerCategoria = new CategoriaAdapter.OnCategoriaClickListener() {
             @Override
             public void onCategoriaClick(View view, int position) {
+                Categoria categoria = categorias.get(position);
+                Intent intent = new Intent(MainActivity.this, NoticiasCategoriaActivity.class);
+                intent.putExtra("categoria", categoria.getNome());
+                startActivity(intent);
             }
         };
         categoriaAdapter = new CategoriaAdapter(categorias, listenerCategoria);
