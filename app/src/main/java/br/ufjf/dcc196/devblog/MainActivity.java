@@ -49,5 +49,7 @@ public class MainActivity extends AppCompatActivity {
         };
         categoriaAdapter = new CategoriaAdapter(categorias, listenerCategoria);
         recyclerViewCategoria.setAdapter(categoriaAdapter);
+
+
     }
 }

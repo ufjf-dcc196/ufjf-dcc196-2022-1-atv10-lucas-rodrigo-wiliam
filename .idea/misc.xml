@@ -3,13 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android/DevBlog/app/src/main/res/drawable/categoria_noticia_background.xml" value="0.2985" />
+        <entry key="..\:/Android/DevBlog/app/src/main/res/drawable/noticia_background.xml" value="0.2985" />
         <entry key="..\:/Android/DevBlog/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Android/DevBlog/app/src/main/res/layout/activity_noticias_categoria.xml" value="0.35260416666666666" />
-        <entry key="..\:/Users/digot/StudioProjects/ufjf-dcc196-2022-1-atv10-lucas-rodrigo-wiliam/app/src/main/res/drawable/categoria_noticia_background.xml" value="0.286" />
-        <entry key="..\:/Users/digot/StudioProjects/ufjf-dcc196-2022-1-atv10-lucas-rodrigo-wiliam/app/src/main/res/drawable/ic_launcher_background.xml" value="0.286" />
-        <entry key="..\:/Users/digot/StudioProjects/ufjf-dcc196-2022-1-atv10-lucas-rodrigo-wiliam/app/src/main/res/drawable/recycler_search_type_background.xml" value="0.286" />
-        <entry key="..\:/Users/digot/StudioProjects/ufjf-dcc196-2022-1-atv10-lucas-rodrigo-wiliam/app/src/main/res/layout/activity_main.xml" value="0.3625" />
-        <entry key="..\:/Users/digot/StudioProjects/ufjf-dcc196-2022-1-atv10-lucas-rodrigo-wiliam/app/src/main/res/layout/teste.xml" value="0.5" />
+        <entry key="..\:/Android/DevBlog/app/src/main/res/layout/noticia_layout.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>
