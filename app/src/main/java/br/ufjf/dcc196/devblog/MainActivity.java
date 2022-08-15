@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import java.util.List;
 
 import Entity.Categoria;
+import Entity.Noticia;
 import Util.Seed;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,7 +19,9 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerViewCategoria;
     private RecyclerView recyclerViewNoticias;
     private List<Categoria> categorias;
+    private List<Noticia> noticias;
     private CategoriaAdapter categoriaAdapter;
+    private NoticiaAdapter noticiaAdapter;
     private AppDatabase db;
     private Seed seed;
 
@@ -50,6 +53,18 @@ public class MainActivity extends AppCompatActivity {
         categoriaAdapter = new CategoriaAdapter(categorias, listenerCategoria);
         recyclerViewCategoria.setAdapter(categoriaAdapter);
 
+        recyclerViewNoticias = findViewById(R.id.recyclerViewNoticias);
+        noticias = db.noticiaDao().findAllOrderByDate();
 
+        LinearLayoutManager layoutManagerNoticia = new LinearLayoutManager(this);
+        recyclerViewNoticias.setLayoutManager(layoutManagerNoticia);
+        NoticiaAdapter.OnNoticiaClickListener listenerNoticia = new NoticiaAdapter.OnNoticiaClickListener() {
+            @Override
+            public void onNoticiaClick(View view, int position) {
+
+            }
+        };
+        noticiaAdapter = new NoticiaAdapter(noticias, listenerNoticia);
+        recyclerViewNoticias.setAdapter(noticiaAdapter);
     }
 }

@@ -16,6 +16,9 @@ public interface NoticiaDao {
     @Query("SELECT * FROM noticia")
     List<Noticia> findAll();
 
+    @Query("SELECT * FROM noticia ORDER BY data_criacao DESC")
+    List<Noticia> findAllOrderByDate();
+
     @Query("SELECT * FROM noticia WHERE id=:id LIMIT 1")
     Noticia buscaPorId(Long id);
 }
