@@ -5,12 +5,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import Entity.Categoria;
+import Util.Seed;
 
 public class MainActivity extends AppCompatActivity {
     private ImageView imageViewPesquisar;
@@ -18,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerViewNoticias;
     private List<Categoria> categorias;
     private CategoriaAdapter categoriaAdapter;
+    private AppDatabase db;
+    private Seed seed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,16 +28,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         this.getSupportActionBar().hide();
 
+        db = AppDatabase.getInstance(getApplicationContext());
+
         recyclerViewCategoria = findViewById(R.id.recyclerViewCategoria);
 
+        seed = new Seed();
+        seed.execSeed(db);
 
-        categorias = new ArrayList<Categoria>(){{
-            add(new Categoria(R.drawable.html_icon, "HTML5"));
-            add(new Categoria(R.drawable.css_icon, "CSS"));
-            add(new Categoria(R.drawable.python_icon, "Python"));
-            add(new Categoria(R.drawable.javascript_icon, "JavaScript"));
-            add(new Categoria(R.drawable.java_icon, "Java"));
-        }};
+        categorias = db.categoriaDao().findAll();
 
         LinearLayoutManager layoutManagerCategoria = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerViewCategoria.setLayoutManager(layoutManagerCategoria);
