@@ -29,11 +29,10 @@ public class MainActivity extends AppCompatActivity {
         this.getSupportActionBar().hide();
 
         db = AppDatabase.getInstance(getApplicationContext());
-
-        recyclerViewCategoria = findViewById(R.id.recyclerViewCategoria);
-
         seed = new Seed();
         seed.execSeed(db);
+
+        recyclerViewCategoria = findViewById(R.id.recyclerViewCategoria);
 
         categorias = db.categoriaDao().findAll();
 

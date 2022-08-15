@@ -15,6 +15,4 @@ public interface CategoriaDao {
 
         @Query("SELECT * FROM categoria")
         List<Categoria> findAll();
-
-
 }
