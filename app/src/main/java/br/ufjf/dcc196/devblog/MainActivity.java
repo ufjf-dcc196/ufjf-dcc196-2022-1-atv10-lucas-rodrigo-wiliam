@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCategoriaClick(View view, int position) {
                 Categoria categoria = categorias.get(position);
                 Intent intent = new Intent(MainActivity.this, NoticiasCategoriaActivity.class);
-                intent.putExtra("categoria", categoria.getNome());
+                intent.putExtra("categoria", categoria.getId());
                 startActivity(intent);
             }
         };
@@ -70,13 +70,5 @@ public class MainActivity extends AppCompatActivity {
         };
         noticiaAdapter = new NoticiaAdapter(noticias, listenerNoticia);
         recyclerViewNoticias.setAdapter(noticiaAdapter);
-
-        for(Categoria categoria : categorias) {
-            Log.e("Categoria", Long.toString(categoria.getId()));
-        }
-
-        for(Noticia noticia : noticias) {
-            Log.e("Noticia", Long.toString(noticia.getIdCategoria()));
-        }
     }
 }

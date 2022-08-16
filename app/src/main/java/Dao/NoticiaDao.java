@@ -21,4 +21,7 @@ public interface NoticiaDao {
 
     @Query("SELECT * FROM noticia WHERE id=:id LIMIT 1")
     Noticia buscaPorId(Long id);
+
+    @Query("SELECT * FROM noticia WHERE id_categoria=:idCategoria")
+    List<Noticia> buscaPorIdCategoria(Long idCategoria);
 }
