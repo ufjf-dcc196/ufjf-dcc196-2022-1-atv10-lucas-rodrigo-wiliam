@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -61,10 +62,21 @@ public class MainActivity extends AppCompatActivity {
         NoticiaAdapter.OnNoticiaClickListener listenerNoticia = new NoticiaAdapter.OnNoticiaClickListener() {
             @Override
             public void onNoticiaClick(View view, int position) {
-
+                Noticia noticia = noticias.get(position);
+                Intent intent = new Intent(MainActivity.this, NoticiaActivity.class);
+                intent.putExtra("idNoticia", noticia.getId());
+                startActivity(intent);
             }
         };
         noticiaAdapter = new NoticiaAdapter(noticias, listenerNoticia);
         recyclerViewNoticias.setAdapter(noticiaAdapter);
+
+        for(Categoria categoria : categorias) {
+            Log.e("Categoria", Long.toString(categoria.getId()));
+        }
+
+        for(Noticia noticia : noticias) {
+            Log.e("Noticia", Long.toString(noticia.getIdCategoria()));
+        }
     }
 }

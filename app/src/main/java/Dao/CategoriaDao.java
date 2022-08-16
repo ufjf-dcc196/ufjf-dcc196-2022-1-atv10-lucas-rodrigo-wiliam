@@ -15,4 +15,7 @@ public interface CategoriaDao {
 
         @Query("SELECT * FROM categoria")
         List<Categoria> findAll();
+
+        @Query("SELECT * FROM categoria WHERE id=:id LIMIT 1")
+        Categoria buscarPorId(Long id);
 }
