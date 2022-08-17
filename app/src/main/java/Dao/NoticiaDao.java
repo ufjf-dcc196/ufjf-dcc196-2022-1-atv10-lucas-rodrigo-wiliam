@@ -28,6 +28,6 @@ public interface NoticiaDao {
     @Query("SELECT * FROM noticia WHERE id_categoria=:idCategoria ORDER BY data_criacao DESC")
     List<Noticia> buscaPorIdCategoria(Long idCategoria);
 
-    @Query("SELECT * FROM noticia WHERE titulo LIKE '%:titulo%' ORDER BY data_criacao DESC")
-    List<Noticia>  buscaPorTitulo (Editable titulo);
+    @Query("SELECT * FROM noticia WHERE titulo LIKE :titulo ORDER BY data_criacao DESC")
+    List<Noticia>  buscaPorTitulo (String titulo);
 }

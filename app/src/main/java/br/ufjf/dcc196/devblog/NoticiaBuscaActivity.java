@@ -27,10 +27,10 @@ public class NoticiaBuscaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pesquisa_titulo_noticia);
         Bundle extras = getIntent().getExtras();
-        db = AppDatabase.getInstance(getApplicationContext());
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         editTextPesquisar = findViewById(R.id.editTextPesquisar);
+        db = AppDatabase.getInstance(getApplicationContext());
 
 
     }
@@ -42,7 +42,7 @@ public class NoticiaBuscaActivity extends AppCompatActivity {
 
     public void buscarNoticias(View view){
         recyclerViewNoticias = findViewById(R.id.recyclerViewNoticias);
-        noticias = db.noticiaDao().buscaPorTitulo(editTextPesquisar.getText());
+        noticias = db.noticiaDao().buscaPorTitulo(editTextPesquisar.getText().toString());
 
         LinearLayoutManager layoutManagerNoticia = new LinearLayoutManager(this);
         recyclerViewNoticias.setLayoutManager(layoutManagerNoticia);
