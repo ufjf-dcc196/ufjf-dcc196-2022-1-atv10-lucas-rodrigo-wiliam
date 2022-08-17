@@ -65,10 +65,11 @@
         android:minWidth="48dp"
         android:minHeight="48dp"
         android:onClick="pesquisarClick"
-        android:tint="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextPesquisar"
+        app:layout_constraintEnd_toEndOf="@+id/editTextPesquisar"
+        app:layout_constraintTop_toTopOf="@+id/editTextPesquisar"
         app:srcCompat="?android:attr/actionModeWebSearchDrawable"
-        tools:layout_editor_absoluteX="347dp"
-        tools:layout_editor_absoluteY="259dp" />
+        app:tint="@color/black" />
 
     <EditText
         android:id="@+id/editTextPesquisar"
@@ -87,6 +88,7 @@
         android:textColorHint="#000000"
         app:circularflow_angles="10"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewPesquisar" />
 
@@ -95,6 +97,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:onClick="buscarNoticias"
         android:text="Pesquisar"
         app:layout_constraintBottom_toTopOf="@+id/recyclerViewNoticias"
         app:layout_constraintEnd_toEndOf="@+id/imageViewPesquisar2"
