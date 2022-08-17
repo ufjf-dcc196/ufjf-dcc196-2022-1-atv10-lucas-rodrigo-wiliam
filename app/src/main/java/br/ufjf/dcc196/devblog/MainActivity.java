@@ -137,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void pesquisarClick(View view) {
-
+        Intent intent = new Intent(MainActivity.this, NoticiaBuscaActivity.class);
+        startActivity(intent);
     }
 }

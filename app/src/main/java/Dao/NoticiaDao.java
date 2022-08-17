@@ -1,5 +1,7 @@
 package Dao;
 
+import android.text.Editable;
+
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -27,5 +29,5 @@ public interface NoticiaDao {
     List<Noticia> buscaPorIdCategoria(Long idCategoria);
 
     @Query("SELECT * FROM noticia WHERE titulo LIKE '%:titulo%' ORDER BY data_criacao DESC")
-    List<Noticia>  buscaPorTitulo (String Titulo);
+    List<Noticia>  buscaPorTitulo (Editable titulo);
 }
