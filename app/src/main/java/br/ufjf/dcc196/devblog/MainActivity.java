@@ -62,11 +62,32 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCategoriaLongClick(View view, int position) {
                 Categoria categoria = categorias.get(position);
-                db.categoriaDao().updateCategoria(categoria);
-                categoriaAdapter.notifyItemChanged(position);
+                Categoria favoritoAntigo = db.categoriaDao().findCategoriaFavoritada();
+
+                boolean mostrarNoticias = false;
+                if(favoritoAntigo == null){
+                    categoria.setFavorito(true);
+                    db.categoriaDao().updateCategoria(categoria);
+                    mostrarNoticias = true;
+                }else{
+                    favoritoAntigo.setFavorito(false);
+                    db.categoriaDao().updateCategoria(favoritoAntigo);
+
+                    if(categoria.getId() != favoritoAntigo.getId()) {
+                        categoria.setFavorito(true);
+                        db.categoriaDao().updateCategoria(categoria);
+                        mostrarNoticias = true;
+                    }
+                }
+
+                categorias.clear();
+                categorias.addAll(db.categoriaDao().findAll());
+                categoriaAdapter.notifyDataSetChanged();
 
                 noticiasFav.clear();
-                noticiasFav.addAll(db.noticiaDao().buscaPorIdCategoria(categoria.getId()));
+                if(mostrarNoticias) {
+                    noticiasFav.addAll(db.noticiaDao().buscaPorIdCategoria(categoria.getId()));
+                }
                 noticiaFavAdapter.notifyDataSetChanged();
                 recyclerViewFavoritos.scrollToPosition(0);
             }
@@ -96,7 +117,10 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerViewFavoritos = findViewById(R.id.recyclerViewFavoritos);
         noticiasFav = new ArrayList<Noticia>();
-
+        Categoria categoriaFavoritada = db.categoriaDao().findCategoriaFavoritada();
+        if(categoriaFavoritada != null) {
+            noticiasFav.addAll(db.noticiaDao().buscaPorIdCategoria(categoriaFavoritada.getId()));
+        }
         LinearLayoutManager layoutManagerNoticiaFav = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerViewFavoritos.setLayoutManager(layoutManagerNoticiaFav);
         NoticiaFavAdapter.OnNoticiaFavClickListener listenerNoticiaFav = new NoticiaFavAdapter.OnNoticiaFavClickListener() {

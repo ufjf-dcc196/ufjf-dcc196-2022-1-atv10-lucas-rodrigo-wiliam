@@ -22,4 +22,8 @@ public interface CategoriaDao {
 
         @Query("SELECT * FROM categoria WHERE id=:id LIMIT 1")
         Categoria buscarPorId(Long id);
+
+        @Query("SELECT * FROM categoria WHERE favorito = 1 LIMIT 1")
+        Categoria findCategoriaFavoritada();
+
 }

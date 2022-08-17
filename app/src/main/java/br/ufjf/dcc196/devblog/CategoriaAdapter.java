@@ -42,6 +42,13 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
         Categoria tipoNoticia = categorias.get(position);
         holder.imageViewTipo.setImageResource(tipoNoticia.getImagemSrc());
         holder.textViewTipo.setText(tipoNoticia.getNome());
+        if (tipoNoticia.isFavorito()){
+            holder.constraintLayoutItem.setBackgroundResource(R.drawable.categoria_noticia_favorita_background);
+        }
+        else{
+            holder.constraintLayoutItem.setBackgroundResource(R.drawable.categoria_noticia_background);
+        }
+
     }
 
     @Override

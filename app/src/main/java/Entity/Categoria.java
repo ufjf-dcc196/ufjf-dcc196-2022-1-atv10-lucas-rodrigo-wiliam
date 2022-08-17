@@ -15,10 +15,13 @@ public class Categoria {
     @ColumnInfo(name = "imagem_src")
     private int imagemSrc;
 
+    @ColumnInfo(name = "favorito")
+    private boolean favorito;
 
     public Categoria(String nome, int imagemSrc) {
         this.nome = nome;
         this.imagemSrc = imagemSrc;
+        this.favorito = false;
     }
 
     public Long getId() {
@@ -43,5 +46,13 @@ public class Categoria {
 
     public void setImagemSrc(int imagemSrc) {
         this.imagemSrc = imagemSrc;
+    }
+
+    public boolean isFavorito() {
+        return favorito;
+    }
+
+    public void setFavorito(boolean favorito) {
+        this.favorito = favorito;
     }
 }
