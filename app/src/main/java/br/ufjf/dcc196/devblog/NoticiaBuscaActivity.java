@@ -1,5 +1,6 @@
 package br.ufjf.dcc196.devblog;
 
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Entity.Noticia;
@@ -25,22 +27,15 @@ public class NoticiaBuscaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.pesquisa_titulo_noticia);
-        Bundle extras = getIntent().getExtras();
-        //ActionBar actionBar = getSupportActionBar();
-        //actionBar.setDisplayHomeAsUpEnabled(true);
-        //editTextPesquisar = findViewById(R.id.editTextPesquisar);
-        //db = AppDatabase.getInstance(getApplicationContext());
-        //recyclerViewNoticias = findViewById(R.id.recyclerViewNoticias);
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item){
-        finish();
-        return true;
-    }
-
-    public void buscarNoticias(View view){
-        noticias = db.noticiaDao().buscaPorTitulo(editTextPesquisar.getText().toString());
+        setContentView(R.layout.activity_noticia_busca);
+        // Bundle extras = getIntent().getExtras();
+        this.setTitle("Procurar");
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        editTextPesquisar = findViewById(R.id.editTextPesquisar);
+        db = AppDatabase.getInstance(getApplicationContext());
+        recyclerViewNoticias = findViewById(R.id.recyclerViewNoticias);
+        noticias = new ArrayList<>();
 
         LinearLayoutManager layoutManagerNoticia = new LinearLayoutManager(this);
         recyclerViewNoticias.setLayoutManager(layoutManagerNoticia);
@@ -55,5 +50,17 @@ public class NoticiaBuscaActivity extends AppCompatActivity {
         };
         noticiaAdapter = new NoticiaAdapter(noticias, listenerNoticia);
         recyclerViewNoticias.setAdapter(noticiaAdapter);
+
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        finish();
+        return true;
+    }
+
+    public void buscarNoticias(View view){
+        noticias.clear();
+        noticias.addAll(db.noticiaDao().buscaPorTitulo(editTextPesquisar.getText().toString()));
+        noticiaAdapter.notifyDataSetChanged();
     }
 }
