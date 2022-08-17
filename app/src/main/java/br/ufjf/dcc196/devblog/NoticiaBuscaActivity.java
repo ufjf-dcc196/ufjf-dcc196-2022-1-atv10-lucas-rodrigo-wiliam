@@ -30,9 +30,17 @@ public class NoticiaBuscaActivity extends AppCompatActivity {
         db = AppDatabase.getInstance(getApplicationContext());
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-
         editTextPesquisar = findViewById(R.id.editTextPesquisar);
 
+
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        finish();
+        return true;
+    }
+
+    public void buscarNoticias(View view){
         recyclerViewNoticias = findViewById(R.id.recyclerViewNoticias);
         noticias = db.noticiaDao().buscaPorTitulo(editTextPesquisar.getText());
 
@@ -49,10 +57,5 @@ public class NoticiaBuscaActivity extends AppCompatActivity {
         };
         noticiaAdapter = new NoticiaAdapter(noticias, listenerNoticia);
         recyclerViewNoticias.setAdapter(noticiaAdapter);
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item){
-        finish();
-        return true;
     }
 }
