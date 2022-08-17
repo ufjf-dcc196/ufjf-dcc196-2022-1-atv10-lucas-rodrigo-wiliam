@@ -1,6 +1,7 @@
 package br.ufjf.dcc196.devblog;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -16,11 +18,13 @@ import Entity.Categoria;
 
 public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.CategoriaViewHolder> {
     private List<Categoria> categorias;
-    private OnCategoriaClickListener listener;
+    private OnCategoriaClickListener listenerClick;
+    private OnCategoriaLongClickListener listenerLongClick;
 
-    public CategoriaAdapter(List<Categoria> categorias, OnCategoriaClickListener listener) {
+    public CategoriaAdapter(List<Categoria> categorias, OnCategoriaClickListener listenerClick, OnCategoriaLongClickListener listenerLongClick) {
         this.categorias = categorias;
-        this.listener = listener;
+        this.listenerClick = listenerClick;
+        this. listenerLongClick = listenerLongClick;
     }
 
     @NonNull
@@ -47,17 +51,26 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
 
 
     public class CategoriaViewHolder extends RecyclerView.ViewHolder {
+        private ConstraintLayout constraintLayoutItem;
         private ImageView imageViewTipo;
         private TextView textViewTipo;
 
         public CategoriaViewHolder(@NonNull View itemView) {
             super(itemView);
+            constraintLayoutItem = itemView.findViewById(R.id.constraintLayoutItem);
             imageViewTipo = itemView.findViewById(R.id.imageViewTipo);
             textViewTipo = itemView.findViewById(R.id.textViewTipo);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    listener.onCategoriaClick(view, getAdapterPosition());
+                    listenerClick.onCategoriaClick(view, getAdapterPosition());
+                }
+            });
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    listenerLongClick.onCategoriaLongClick(view, getAdapterPosition());
+                    return true;
                 }
             });
         }
@@ -65,5 +78,9 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.Cate
 
     public interface OnCategoriaClickListener{
         void onCategoriaClick(View view, int position);
+    }
+
+    public interface OnCategoriaLongClickListener{
+        void onCategoriaLongClick(View view, int position);
     }
 }

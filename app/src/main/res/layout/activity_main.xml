@@ -35,11 +35,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
+            android:onClick="pesquisarClick"
+            android:tint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="?android:attr/actionModeWebSearchDrawable"
-            android:tint="@color/white"/>
+            app:srcCompat="?android:attr/actionModeWebSearchDrawable" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

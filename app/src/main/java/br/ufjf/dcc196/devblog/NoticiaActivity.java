@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 
-import Dao.NoticiaDao;
 import Entity.Categoria;
 import Entity.Noticia;
 
@@ -42,7 +41,7 @@ public class NoticiaActivity extends AppCompatActivity {
 
         imageViewIMG = findViewById(R.id.imageViewImg);
         textViewCategoriaData = findViewById(R.id.textViewCategoriaData);
-        textViewTitulo = findViewById(R.id.textViewTitulo);
+        textViewTitulo = findViewById(R.id.textViewTituloFav);
         textViewDescricao = findViewById(R.id.textViewDescricao);
 
         imageViewIMG.setImageResource(noticia.getImagemSrc());

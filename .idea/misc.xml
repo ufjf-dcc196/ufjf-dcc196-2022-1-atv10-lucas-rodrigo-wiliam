@@ -4,10 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android/DevBlog/app/src/main/res/drawable/categoria_noticia_background.xml" value="0.2985" />
+        <entry key="..\:/Android/DevBlog/app/src/main/res/drawable/categoria_noticia_favorita_background.xml" value="0.2985" />
+        <entry key="..\:/Android/DevBlog/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2985" />
         <entry key="..\:/Android/DevBlog/app/src/main/res/drawable/noticia_background.xml" value="0.2985" />
+        <entry key="..\:/Android/DevBlog/app/src/main/res/drawable/recycler_search_type_background.xml" value="0.2985" />
         <entry key="..\:/Android/DevBlog/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Android/DevBlog/app/src/main/res/layout/activity_noticia.xml" value="0.36666666666666664" />
         <entry key="..\:/Android/DevBlog/app/src/main/res/layout/activity_noticias_categoria.xml" value="0.35260416666666666" />
+        <entry key="..\:/Android/DevBlog/app/src/main/res/layout/categoria_noticia_layout.xml" value="0.25" />
+        <entry key="..\:/Android/DevBlog/app/src/main/res/layout/noticia_favorita_layout.xml" value="0.36666666666666664" />
         <entry key="..\:/Android/DevBlog/app/src/main/res/layout/noticia_layout.xml" value="0.36666666666666664" />
       </map>
     </option>

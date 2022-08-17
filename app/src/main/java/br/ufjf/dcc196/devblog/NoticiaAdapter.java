@@ -39,6 +39,7 @@ public class NoticiaAdapter extends RecyclerView.Adapter<NoticiaAdapter.NoticiaV
         holder.imageViewNoticia.setImageResource(noticia.getImagemSrc());
         holder.textViewTitle.setText(noticia.getTitulo());
         holder.textViewDescricao.setText(noticia.getDescricao());
+
     }
 
     @Override
@@ -55,7 +56,7 @@ public class NoticiaAdapter extends RecyclerView.Adapter<NoticiaAdapter.NoticiaV
         public NoticiaViewHolder(@NonNull View itemView) {
             super(itemView);
             imageViewNoticia = itemView.findViewById(R.id.imageViewNoticia);
-            textViewTitle = itemView.findViewById(R.id.textViewTitulo);
+            textViewTitle = itemView.findViewById(R.id.textViewTituloFav);
             textViewDescricao = itemView.findViewById(R.id.textViewDescricao);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -1,5 +1,6 @@
 package br.ufjf.dcc196.devblog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,6 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import Entity.Categoria;
@@ -19,10 +22,14 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imageViewPesquisar;
     private RecyclerView recyclerViewCategoria;
     private RecyclerView recyclerViewNoticias;
+    private RecyclerView recyclerViewFavoritos;
+    private ItemTouchHelper.SimpleCallback touchHelperCallback;
     private List<Categoria> categorias;
     private List<Noticia> noticias;
+    private List<Noticia> noticiasFav;
     private CategoriaAdapter categoriaAdapter;
     private NoticiaAdapter noticiaAdapter;
+    private NoticiaFavAdapter noticiaFavAdapter;
     private AppDatabase db;
     private Seed seed;
 
@@ -42,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         LinearLayoutManager layoutManagerCategoria = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerViewCategoria.setLayoutManager(layoutManagerCategoria);
-        CategoriaAdapter.OnCategoriaClickListener listenerCategoria = new CategoriaAdapter.OnCategoriaClickListener() {
+        CategoriaAdapter.OnCategoriaClickListener listenerCategoriaClick = new CategoriaAdapter.OnCategoriaClickListener() {
             @Override
             public void onCategoriaClick(View view, int position) {
                 Categoria categoria = categorias.get(position);
@@ -51,7 +58,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         };
-        categoriaAdapter = new CategoriaAdapter(categorias, listenerCategoria);
+        CategoriaAdapter.OnCategoriaLongClickListener listenerCategoriaLongClick = new CategoriaAdapter.OnCategoriaLongClickListener() {
+            @Override
+            public void onCategoriaLongClick(View view, int position) {
+                Categoria categoria = categorias.get(position);
+                db.categoriaDao().updateCategoria(categoria);
+                categoriaAdapter.notifyItemChanged(position);
+
+                noticiasFav.clear();
+                noticiasFav.addAll(db.noticiaDao().buscaPorIdCategoria(categoria.getId()));
+                noticiaFavAdapter.notifyDataSetChanged();
+                recyclerViewFavoritos.scrollToPosition(0);
+            }
+        };
+        categoriaAdapter = new CategoriaAdapter(categorias, listenerCategoriaClick, listenerCategoriaLongClick);
         recyclerViewCategoria.setAdapter(categoriaAdapter);
 
         recyclerViewNoticias = findViewById(R.id.recyclerViewNoticias);
@@ -70,5 +90,29 @@ public class MainActivity extends AppCompatActivity {
         };
         noticiaAdapter = new NoticiaAdapter(noticias, listenerNoticia);
         recyclerViewNoticias.setAdapter(noticiaAdapter);
+
+
+
+
+        recyclerViewFavoritos = findViewById(R.id.recyclerViewFavoritos);
+        noticiasFav = new ArrayList<Noticia>();
+
+        LinearLayoutManager layoutManagerNoticiaFav = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewFavoritos.setLayoutManager(layoutManagerNoticiaFav);
+        NoticiaFavAdapter.OnNoticiaFavClickListener listenerNoticiaFav = new NoticiaFavAdapter.OnNoticiaFavClickListener() {
+            @Override
+            public void onNoticiaFavClick(View view, int position) {
+                Noticia noticia = noticias.get(position);
+                Intent intent = new Intent(MainActivity.this, NoticiaActivity.class);
+                intent.putExtra("idNoticia", noticia.getId());
+                startActivity(intent);
+            }
+        };
+        noticiaFavAdapter = new NoticiaFavAdapter(noticiasFav, listenerNoticiaFav);
+        recyclerViewFavoritos.setAdapter(noticiaFavAdapter);
+    }
+
+    public void pesquisarClick(View view) {
+
     }
 }
